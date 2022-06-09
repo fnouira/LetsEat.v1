@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- https://stackoverflow.com/questions/358196/c-sharp-internal-access-modifier-when-doing-unit-testing -->
+  <ItemGroup>
+      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>$(MSBuildProjectName).UnitTests</_Parameter1>
+      </AssemblyAttribute>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\LetsEat.Models\LetsEat.Models.csproj" />
+    <ProjectReference Include="..\LetsEat.Services.Abstractions\LetsEat.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\LetsEat.DataAccess.Abstractions\LetsEat.DataAccess.Abstractions.csproj" />
+  </ItemGroup>
+</Project>
