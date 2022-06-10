@@ -1,5 +1,6 @@
 using LetsEat.DataAccess.Abstractions;
 using LetsEat.Models;
+using LetsEat.Services.Core;
 
 namespace LetsEat.Services
 {
@@ -21,7 +22,11 @@ namespace LetsEat.Services
             Mock<ITableBookingRepository> mockedTableBookingRepository = new Mock<ITableBookingRepository>();
             Mock<ITableRepository> mockedTableRepository = new Mock<ITableRepository>();
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(Array.Empty<TableDao>());
-            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+
+            // We can use the real instance here
+            ITableBookingFactory tableBookingFactory = new TableBookingFactory();
+
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(tableBookingFactory, mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 
@@ -38,7 +43,11 @@ namespace LetsEat.Services
             Mock<ITableBookingRepository> mockedTableBookingRepository = new Mock<ITableBookingRepository>();
             Mock<ITableRepository> mockedTableRepository = new Mock<ITableRepository>();
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(Array.Empty<TableDao>());
-            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+
+            // We can use the real instance here
+            ITableBookingFactory tableBookingFactory = new TableBookingFactory();
+
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(tableBookingFactory, mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingRequest request = null;
 
@@ -69,7 +78,10 @@ namespace LetsEat.Services
             Mock<ITableRepository> mockedTableRepository = new Mock<ITableRepository>();
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(availableTables);
 
-            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            // We can use the real instance here
+            ITableBookingFactory tableBookingFactory = new TableBookingFactory();
+
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(tableBookingFactory, mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 
@@ -104,7 +116,10 @@ namespace LetsEat.Services
             // Make sure no table available
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(Array.Empty<TableDao>());
 
-            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            // We can use the real instance here
+            ITableBookingFactory tableBookingFactory = new TableBookingFactory();
+
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(tableBookingFactory, mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 
@@ -132,7 +147,10 @@ namespace LetsEat.Services
             Mock<ITableRepository> mockedTableRepository = new Mock<ITableRepository>();
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(availableTables);
 
-            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            // We can use the real instance here
+            ITableBookingFactory tableBookingFactory = new TableBookingFactory();
+
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(tableBookingFactory, mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 
@@ -174,7 +192,10 @@ namespace LetsEat.Services
 
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(availableTables);
 
-            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            // We can use the real instance here
+            ITableBookingFactory tableBookingFactory = new TableBookingFactory();
+
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(tableBookingFactory, mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 

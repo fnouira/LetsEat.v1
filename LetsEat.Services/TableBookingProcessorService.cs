@@ -1,5 +1,6 @@
 using LetsEat.DataAccess.Abstractions;
 using LetsEat.Models;
+using LetsEat.Services.Core;
 
 namespace LetsEat.Services
 {
@@ -9,12 +10,14 @@ namespace LetsEat.Services
     /// </summary>
     internal class TableBookingProcessorService : ITableBookingProcessorService
     {
+        private readonly ITableBookingFactory tableBookingFactory;
         private readonly ITableBookingRepository tableBookingRepository;
         private readonly ITableRepository tableRepository;
 
-        public TableBookingProcessorService(ITableBookingRepository tableBookingRepository, ITableRepository tableRepository)
+        public TableBookingProcessorService(ITableBookingFactory tableBookingFactory, ITableBookingRepository tableBookingRepository, ITableRepository tableRepository)
         {
             this.tableRepository = tableRepository;
+            this.tableBookingFactory = tableBookingFactory;
             this.tableBookingRepository = tableBookingRepository;
         }
 
@@ -22,12 +25,12 @@ namespace LetsEat.Services
         {
             if (request == null) { throw new ArgumentNullException(nameof(request)); }
 
-            TableBookingResult result = Create<TableBookingResult>(request);
+            TableBookingResult result = tableBookingFactory.Create<TableBookingResult>(request);
 
             IReadOnlyCollection<TableDao> availableTables = tableRepository.GetAvailableTables(request.Date);
             if (availableTables.FirstOrDefault() is TableDao availableTable)
             {
-                TableBookingDao tableBooking = Create<TableBookingDao>(request);
+                TableBookingDao tableBooking = tableBookingFactory.Create<TableBookingDao>(request);
                 tableBooking.TableId = availableTable.Id;
                 tableBookingRepository.Save(tableBooking);
                 result.TableBookingId = tableBooking.Id;
@@ -39,19 +42,6 @@ namespace LetsEat.Services
             }
 
             return result;
-        }
-
-        private T Create<T>(TableBookingRequest request)
-        where T : TableBookingBase, new()
-        {
-            return new T
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Tel = request.Tel,
-                Email = request.Email,
-                Date = request.Date
-            };
         }
     }
 }
