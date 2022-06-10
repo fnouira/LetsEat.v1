@@ -2,7 +2,7 @@ using LetsEat.Models;
 
 namespace LetsEat.Services
 {
-    public interface ITableBookingRequestService
+    public interface ITableBookingProcessorService
     {
         TableBookingResult BookTable(TableBookingRequest request);
     }

@@ -4,7 +4,7 @@ using LetsEat.Models;
 namespace LetsEat.Services
 {
     [TestFixture]
-    internal class TableBookingRequestServiceTest
+    internal class TableBookingProcessorServiceTest
     {
         [Test]
         public void book_table_should_return_reservation_info()
@@ -21,7 +21,7 @@ namespace LetsEat.Services
             Mock<ITableBookingRepository> mockedTableBookingRepository = new Mock<ITableBookingRepository>();
             Mock<ITableRepository> mockedTableRepository = new Mock<ITableRepository>();
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(Array.Empty<TableDao>());
-            ITableBookingRequestService bookingService = new TableBookingRequestService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 
@@ -38,7 +38,7 @@ namespace LetsEat.Services
             Mock<ITableBookingRepository> mockedTableBookingRepository = new Mock<ITableBookingRepository>();
             Mock<ITableRepository> mockedTableRepository = new Mock<ITableRepository>();
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(Array.Empty<TableDao>());
-            ITableBookingRequestService bookingService = new TableBookingRequestService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingRequest request = null;
 
@@ -69,7 +69,7 @@ namespace LetsEat.Services
             Mock<ITableRepository> mockedTableRepository = new Mock<ITableRepository>();
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(availableTables);
 
-            ITableBookingRequestService bookingService = new TableBookingRequestService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 
@@ -104,7 +104,7 @@ namespace LetsEat.Services
             // Make sure no table available
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(Array.Empty<TableDao>());
 
-            ITableBookingRequestService bookingService = new TableBookingRequestService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 
@@ -132,7 +132,7 @@ namespace LetsEat.Services
             Mock<ITableRepository> mockedTableRepository = new Mock<ITableRepository>();
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(availableTables);
 
-            ITableBookingRequestService bookingService = new TableBookingRequestService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 
@@ -174,7 +174,7 @@ namespace LetsEat.Services
 
             mockedTableRepository.Setup(m => m.GetAvailableTables(new DateTime(2022, 05, 15))).Returns(availableTables);
 
-            ITableBookingRequestService bookingService = new TableBookingRequestService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
+            ITableBookingProcessorService bookingService = new TableBookingProcessorService(mockedTableBookingRepository.Object, mockedTableRepository.Object);
 
             TableBookingResult actual = bookingService.BookTable(request);
 

@@ -3,12 +3,12 @@ using LetsEat.Models;
 
 namespace LetsEat.Services
 {
-    internal class TableBookingRequestService : ITableBookingRequestService
+    internal class TableBookingProcessorService : ITableBookingProcessorService
     {
         private readonly ITableBookingRepository tableBookingRepository;
         private readonly ITableRepository tableRepository;
 
-        public TableBookingRequestService(ITableBookingRepository tableBookingRepository, ITableRepository tableRepository)
+        public TableBookingProcessorService(ITableBookingRepository tableBookingRepository, ITableRepository tableRepository)
         {
             this.tableRepository = tableRepository;
             this.tableBookingRepository = tableBookingRepository;
