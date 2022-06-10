@@ -3,6 +3,10 @@ using LetsEat.Models;
 
 namespace LetsEat.Services
 {
+    /// <summary>
+    /// This should always be internal as we need to use dependency injection to use it
+    /// <see cref="ServiceCollectionExtensions" for more information/>
+    /// </summary>
     internal class TableBookingProcessorService : ITableBookingProcessorService
     {
         private readonly ITableBookingRepository tableBookingRepository;
